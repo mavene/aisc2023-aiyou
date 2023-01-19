@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <body>
+        <h1>{{title}}</h1>
+        <form name="form", method="POST", style="text-align: center;">
+            <div id="search_terms">Search:</div>
+            <input type="text" name="search_terms" placeholder="Anything you want">
+        	<!-- <div id="past_reviews">Review:</div>
+        	<input type="text" name="past_reviews" value="Anything you want"> -->
+        	<button value="Submit">Run</button>
+        </form>
+        {% for idx in range(output|length) %}
+        <p style="text-align: center;">
+            {{output[idx]}}
+        </p>
+        {% endfor %}
+        <br><a href="index">Restart your Search</a>
+    </body>
+{% endblock %}

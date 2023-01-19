@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+<h1 class="display-1">Testing database information is preloaded correctly!</h1>
+
+<h3 class="display-3">Here you go~</h3>
+
+{% if entities %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Entity ID</th>
+      <th scope="col">Entity Name</th>
+      <th scope="col">Entity Address</th>
+      <th scope="col">Reviews</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for ent_idx in range(entities|length) %}
+  	<tr>
+      <th scope="row" class="lead">{{ entities[ent_idx].id }}</th>
+      <td class="lead">{{ entities[ent_idx].name }}</td>
+      <td class="lead">{{ entities[ent_idx].address }}</td>
+      {% for rev_idx in range(reviews|length) %}
+        {% if reviews[rev_idx].entity_id == entities[ent_idx].id %}
+        <td class="lead">{{ reviews[rev_idx].content }}</td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% else %}
+	<p>There are no reviews yet!</p>
+{% endif %}
+
+{% endblock %}

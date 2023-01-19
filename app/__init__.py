@@ -1,9 +1,13 @@
 from flask import Flask
-from app.middleware import PrefixMiddleware
+from config import Config
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 
 application = Flask(__name__)
+application.config.from_object(Config)
 
-# set voc=False if you run on local computer
-application.wsgi_app = PrefixMiddleware(application.wsgi_app, voc=False)
+db = SQLAlchemy()
+db.init_app(application)
+migrate = Migrate(application, db)
 
 from app import routes

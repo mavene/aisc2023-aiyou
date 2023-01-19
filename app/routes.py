@@ -1,15 +1,30 @@
-from flask import render_template
-from app import application
+from flask import render_template, request
+from app import application, model_ab
+from app.models import Entity, Review
 
 @application.route('/')
 @application.route('/index')
 def index():
-    return render_template('index.html', title='Mini Project 1 Home')
+    return render_template('index.html', title='Review NLP Test Home')
 
-@application.route('/ex1')
-def exercise1():
-    return render_template('ex1.html', title='Mini Project 1 Exercise 1')
+@application.route('/about-us')
+def about_us():
+    return render_template('about_us.html', title='OOPS')
 
-@application.route('/ex2')
-def exercise2():
-    return render_template('ex2.html', title='Mini Project 1 Exercise 2')
+@application.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == "POST":
+        search_terms = request.form.get("search_terms")
+        # TODO: Modify so it retrieves model_id of relevant reviews and their attached sentiment
+        result = model_ab.sentiment_analysis(search_terms)
+    else:
+        result = ""
+    return render_template('search.html', title='Sentiments of Reviewers based on your search terms...', output=result)
+
+# For testing purposes to check database entries
+@application.route('/test_db', methods=['GET', 'POST'])
+def test_db():
+    entities = Entity.query.all()
+    reviews = Review.query.all()
+    return render_template('test_db.html', title='Testing testing 1 2 3',
+        entities=entities, reviews=reviews)

@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block app_content %}
 <html>
     <head>
         <title>{{title}}</title>
@@ -5,12 +8,15 @@
     <body>
         <h1>Welcome to {{title}}</h1>
         <p>
-        	In this project you will generate some random number and sort them.
+        	Want to see key aspects of reviews?
         </p>
         <ul>
-            <li><a href="ex1">Exercise 1</a></li>
-            <li><a href="ex2">Exercise 2</a></li>
+            <li><a href="search">Get to the bottom ? IDK </a></li>
+        </ul>
+        <ul>
+            <li><a href="test_db">Database Testing</a></li>
         </ul>
 
     </body>
 </html>
+{% endblock %}
