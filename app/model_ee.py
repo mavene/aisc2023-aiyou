@@ -1,5 +1,3 @@
-
-
 # maybe put this in a preloader so dont load twice when running twice
 from sgnlp.models.emotion_entailment import (
     RecconEmotionEntailmentConfig,
@@ -27,7 +25,7 @@ def emotion_entailment(text):
 	print(text)
 
 	# TODO: Appears upon clicking each company card for the 5 big areas
-    
+
 	input_batch = {
     "emotion": ["happiness", "happiness", "happiness", "happiness"],
     "target_utterance": [

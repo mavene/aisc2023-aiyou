@@ -1,3 +1,5 @@
+from app.models import Review
+
 from sgnlp.models.sentic_gcn import (
     SenticGCNBertTokenizer,
     SenticGCNBertEmbeddingConfig,
@@ -46,26 +48,29 @@ def sentiment_analysis(search_terms):
     # Label : 1 (Positive)
 
     processed_search_terms = search_terms.split(",")
-    # TODO: Query all reviews from database
-    past_reviews = ["The food was lousy - too sweet or too salty and the portions tiny.",
-    "Everything is always cooked to perfection , the service is excellent, the decor cool and understated.",
-    "Bagels are ok , but be sure not to make any special requests !"]
+    past_reviews = Review.query.all()
+    past_reviews_list = [r.content for r in past_reviews]
+
+    # past_reviews = ["The food was lousy - too sweet or too salty and the portions tiny.",
+    # "Everything is always cooked to perfection , the service is excellent, the decor cool and understated.",
+    # "Bagels are ok , but be sure not to make any special requests !"]
 
     input_batch = []
 
-    for review in past_reviews:
-        for search_term in processed_search_terms:
+    for search_term in processed_search_terms:
+        relevant = False
+        for review in past_reviews_list:
             if search_term in review:
                 relevant = True
-            else:
-                relevant = False
-        if relevant:
-            input_batch.append(
-                    {
-                        "aspects": processed_search_terms,
-                        "sentence": review
-                    }
-            )
+            if relevant:
+                input_batch.append(
+                        {
+                            "aspects": processed_search_terms,
+                            "sentence": review
+                        }
+                )
+    
+    print(input_batch)
         
     # input_batch = [
     #     {
@@ -92,31 +97,34 @@ def sentiment_analysis(search_terms):
 
         for i, line in enumerate(dense_output):
             sub_output = ""
-            output.append(f"Revew {i} by placeholder_name_from_db")
+            output.append(f"Review {i} for placeholder_entity_from_db")
             review = " ".join(line['sentence'])
             output.append(f" '{review}' ")
             for idx, aspect in enumerate(line['aspects']):
-                sub_output = f"{line['sentence'][aspect[0]]} - {label_dict[str(line['labels'][idx])]}"
+                if len(aspect) == 1:
+                    current_word = line['sentence'][aspect[0]].strip(",.(){}<>!?")
+                else:
+                    current_word = " ".join(line['sentence'][aspect[0]:aspect[-1]+1]).strip(",.(){}<>!?")
+                sub_output = f"{current_word} - {label_dict[str(line['labels'][idx])]}"
                 output.append(sub_output)
                 sub_output = ""
 
     if len(output) < 1:
-        output.append("No reviews found on search term")
+        output.append("No reviews found for your search :/")
 
     return output
 
 # Overall - Model Stuff
 # TODO: Figure out how to preload model bins so it doesn't load all the time
 # DONE: Setup database for reviews and figure out retrieval
-# TODO: Modify this file to accomodate for search across companies and show 3 most renet reviews and sentiment
 
 # HTML Stuff
 # Landing page
-# TODO: Navbar - Home, About us, Get Started
+# Done (left with CSS): Inherit Navbar Base - Home, About us, Get Started
 # TODO: Quick start guide
 # Search bar webpage
-# TODO: Handle multi-word search terms
+# DONE: Handle multi-word search terms
 # TODO: Check if search term is capitalised or not (input sanitation)
 # Company dashboard right is word cloud with top 5 areas of Food, Service, Cleanliness, (3 will be big on top and 2 will be smaller below -> probably use templating)
-# TODO: Left is Google Maps card with review,
+# TODO: Left is card
 # TODO: Right is word cloud at top then, top 5 areas of Food, Service, Cleanliness, (3 will be big on top and 2 will be smaller below -> probably use templating)

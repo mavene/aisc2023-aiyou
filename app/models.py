@@ -42,7 +42,7 @@ class Review(db.Model):
     # user = db.relationship("User", back_populates="review")
 
     def __repr__(self):
-        return f'Content of Review: {self.content}'
+        return f'{self.content}'
 
 with application.app_context():
     db.create_all()
