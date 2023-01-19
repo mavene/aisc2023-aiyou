@@ -12,6 +12,8 @@
       <th scope="col">Entity ID</th>
       <th scope="col">Entity Name</th>
       <th scope="col">Entity Address</th>
+      <th scope="col">Entity Contact</th>
+      <th scope="col">Entity Website</th>
       <th scope="col">Reviews</th>
     </tr>
   </thead>
@@ -21,6 +23,8 @@
       <th scope="row" class="lead">{{ entities[ent_idx].id }}</th>
       <td class="lead">{{ entities[ent_idx].name }}</td>
       <td class="lead">{{ entities[ent_idx].address }}</td>
+      <td class="lead">{{ entities[ent_idx].contact }}</td>
+      <td class="lead">{{ entities[ent_idx].website }}</td>
       {% for rev_idx in range(reviews|length) %}
         {% if reviews[rev_idx].entity_id == entities[ent_idx].id %}
         <td class="lead">{{ reviews[rev_idx].content }}</td>

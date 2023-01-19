@@ -29,6 +29,8 @@ class Entity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128))
     address = db.Column(db.String(255))
+    website = db.Column(db.String(128))
+    contact = db.Column(db.String(64))
     review = db.relationship("Review", back_populates="entity")
 
 # Child
@@ -53,7 +55,7 @@ with application.app_context():
     df = pd.read_csv(filename)
 
     for index, row in df.iterrows():
-        new_entity = Entity(id=row['entity_id'], name=row['name'], address=row['address'])
+        new_entity = Entity(id=row['entity_id'], name=row['name'], address=row['address'], website=row['website'], contact=row['contact'])
         new_review = Review(id=row['review_id'], content=row['review'], entity_id=row['entity_id'])
         db.session.merge(new_entity)
         db.session.merge(new_review)

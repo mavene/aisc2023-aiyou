@@ -1,5 +1,5 @@
 from flask import render_template, request
-from app import application, model_ab
+from app import application, sentic_bert
 from app.models import Entity, Review
 
 @application.route('/')
@@ -16,7 +16,7 @@ def search():
     if request.method == "POST":
         search_terms = request.form.get("search_terms")
         # TODO: Modify so it retrieves model_id of relevant reviews and their attached sentiment
-        result = model_ab.sentiment_analysis(search_terms)
+        result = sentic_bert.sentiment_analysis(search_terms)
     else:
         result = ""
     return render_template('search.html', title='Sentiments of Reviewers based on your search terms...', output=result)

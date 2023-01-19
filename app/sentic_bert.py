@@ -1,4 +1,5 @@
 from app.models import Review
+from app import search_dict
 
 from sgnlp.models.sentic_gcn import (
     SenticGCNBertTokenizer,
@@ -35,33 +36,32 @@ preprocessor = SenticGCNBertPreprocessor(
 postprocessor = SenticGCNBertPostprocessor()
 
 def sentiment_analysis(search_terms):
-    # ["food", "portions"],
-    # "The food was lousy - too sweet or too salty and the portions tiny.",
-    # Label : -1 (Negative)
-
-    # ["service", "decor"],
-    # "Everything is always cooked to perfection , the service is excellent, the decor cool and understated."
-    # Label : 0 (Neutral)
-
-    # ["Bagels"],
-    # "Bagels are ok , but be sure not to make any special requests !"
-    # Label : 1 (Positive)
-
     processed_search_terms = search_terms.split(",")
     past_reviews = Review.query.all()
-    past_reviews_list = [r.content for r in past_reviews]
-
-    # past_reviews = ["The food was lousy - too sweet or too salty and the portions tiny.",
-    # "Everything is always cooked to perfection , the service is excellent, the decor cool and understated.",
-    # "Bagels are ok , but be sure not to make any special requests !"]
+    #print(past_reviews)
+    past_reviews_dict = {r.content : r.entity_id for r in past_reviews}
 
     input_batch = []
+    candidate = []
+    output = []
 
+    category_found = ""
     for search_term in processed_search_terms:
         relevant = False
-        for review in past_reviews_list:
-            if search_term in review:
+        search_term.split()
+        if len(search_term.split(" ")) > 1:
+            for term in search_term.split(" "):
+                #print(term)
+                category_found = [ cat for cat in search_dict.terms if term.lower() in search_dict.terms[cat]]
+        else:
+            category_found = [ cat for cat in search_dict.terms if search_term.lower() in search_dict.terms[cat]]
+
+        #print(category_found)
+        for review in past_reviews_dict.keys():
+        
+            if search_term in review and category_found:
                 relevant = True
+                candidate.append({past_reviews_dict.get(review): category_found})
             if relevant:
                 input_batch.append(
                         {
@@ -69,21 +69,20 @@ def sentiment_analysis(search_terms):
                             "sentence": review
                         }
                 )
-    
-    print(input_batch)
-        
-    # input_batch = [
-    #     {
-    #         "aspects": processed_search_terms,
-    #         "sentence": past_reviews,
-    #     },
-    # ]
+                relevant = False
+
+        category_found = ""
 
     output = []
 
-    if len(input_batch) > 0:
-        processed_inputs, processed_indices = preprocessor(input_batch)
-        outputs = model(processed_indices)
+    if input_batch:
+        try:
+            processed_inputs, processed_indices = preprocessor(input_batch)
+            print(processed_indices)
+            outputs = model(processed_indices)
+        except ValueError:
+            output.append("Something went wrong :/")
+            return output
     
         # Postprocessing
         dense_output = postprocessor(processed_inputs=processed_inputs, model_outputs=outputs)
@@ -97,7 +96,7 @@ def sentiment_analysis(search_terms):
 
         for i, line in enumerate(dense_output):
             sub_output = ""
-            output.append(f"Review {i} for placeholder_entity_from_db")
+            output.append(f"Review for placeholder company using i var to find")
             review = " ".join(line['sentence'])
             output.append(f" '{review}' ")
             for idx, aspect in enumerate(line['aspects']):
@@ -125,6 +124,7 @@ def sentiment_analysis(search_terms):
 # Search bar webpage
 # DONE: Handle multi-word search terms
 # TODO: Check if search term is capitalised or not (input sanitation)
+# TODO: Aggregate the 5 areas: Food, Service, Cleanliness, Price, Atmosphere
 # Company dashboard right is word cloud with top 5 areas of Food, Service, Cleanliness, (3 will be big on top and 2 will be smaller below -> probably use templating)
 # TODO: Left is card
 # TODO: Right is word cloud at top then, top 5 areas of Food, Service, Cleanliness, (3 will be big on top and 2 will be smaller below -> probably use templating)
