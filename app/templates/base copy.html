@@ -5,24 +5,26 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href='https://fonts.googleapis.com/css?family=Lexend' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/base.css') }}" />
     {% endblock %}
   </head>
   <body>
     {% block navbar %}
     <nav class="navbar">
-      <a href="{{ url_for('index') }}" class="logo">
-        <img src="#" alt="Ai-yo?">
-      </a>
-      <ul class="nav-links">
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('about_us') }}">About Us</a></li>
-        <div class="search-button">
-          <li class="nav-item"><a class="button-link" href="{{ url_for('search') }}" style="color: #FFFFFF; font-size: 18px;">Get Started</a></li>
-        </div>
-      </ul>
-    </nav>
+      <div class="nav-left">
+          <ul>
+              <li><a href="#">Logo</a></li>
+          </ul>
+      </div>
+      <div class="nav-right">
+        <ul>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('about_us') }}">About Us</a></li>
+          <div class="search-button">
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('search') }}">Get Started</a></li>
+          </div>
+          </ul>
+      </div>
     {% endblock %}
     
     <!-- Your page content -->

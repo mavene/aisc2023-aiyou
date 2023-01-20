@@ -2,13 +2,11 @@
 
 {% block app_content %}
     <body>
-        <h1>{{title}}</h1>
-        <form name="form", method="POST", style="text-align: center;">
-            <div id="search_terms">Search:</div>
-            <input type="text" name="search_terms" placeholder="Anything you want">
-        	<!-- <div id="past_reviews">Review:</div>
-        	<input type="text" name="past_reviews" value="Anything you want"> -->
-        	<button value="Submit">Run</button>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/search.css') }}" />
+        <form name="form", method="POST">
+            <div class="search-bar">
+                <input type="text" name="search_terms" placeholder="Find cafes, restaurants, and more...">
+            </div>
         </form>
         {% for idx in range(output|length) %}
         <p style="text-align: center;">
@@ -16,10 +14,10 @@
         </p>
         {% endfor %}
 
-        {% if cards %}
+        <!-- {% if cards %}
+        {% endif %} -->
+
         
-        {% endif %}
-        <br><a href="index">Restart your Search</a>
     </body>
 
 {% endblock %}

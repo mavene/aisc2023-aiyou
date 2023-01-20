@@ -1,4 +1,4 @@
-from app.models import Review
+from app.models import Review, Card
 from app import search_dict
 
 from sgnlp.models.sentic_gcn import (
@@ -45,6 +45,7 @@ def sentiment_analysis(search_terms):
     candidate = []
     output = []
 
+    # Find which "tag" each search term belongs to
     category_found = ""
     for search_term in processed_search_terms:
         relevant = False
@@ -56,7 +57,7 @@ def sentiment_analysis(search_terms):
         else:
             category_found = [ cat for cat in search_dict.terms if search_term.lower() in search_dict.terms[cat]]
 
-        #print(category_found)
+        print(category_found)
         for review in past_reviews_dict.keys():
         
             if search_term in review and category_found:
@@ -75,6 +76,7 @@ def sentiment_analysis(search_terms):
 
     output = []
 
+    # Perform inference
     if input_batch:
         try:
             processed_inputs, processed_indices = preprocessor(input_batch)
@@ -120,6 +122,7 @@ def sentiment_analysis(search_terms):
 # HTML Stuff
 # Landing page
 # Done (left with CSS): Inherit Navbar Base - Home, About us, Get Started
+# DONE: Search bar (left icon)
 # TODO: Quick start guide
 # Search bar webpage
 # DONE: Handle multi-word search terms

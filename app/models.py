@@ -60,3 +60,11 @@ with application.app_context():
         db.session.merge(new_entity)
         db.session.merge(new_review)
         db.session.commit()
+
+class Card():
+    def __init__(self, entity_id):
+        self.entity = entity_id
+        # Query for everything using the entity_id
+        # Retrieve latest, oldest and random review
+        # tags -> strengths (Food, Service, Price, Atmosphere, Preferences)
+        # use get, set methods for these i guess
