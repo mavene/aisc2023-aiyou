@@ -2,21 +2,90 @@
 
 {% block app_content %}
     <body>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;300;400;500&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/search.css') }}" />
+        
+        <div class="search-box">
         <form name="form", method="POST">
             <div class="search-bar">
                 <input type="text" name="search_terms" placeholder="Find cafes, restaurants, and more...">
             </div>
         </form>
-        {% for idx in range(output|length) %}
-        <p style="text-align: center;">
-            {{output[idx]}}
-        </p>
+        </div>
+
+        {% if status %}
+          <img class="greeting" style="display: block; margin: 0 auto !important; align-items: center; padding-top:200px;" src="../static/resources/logo_aiyou.svg">
+        {% endif %}
+
+        {% if search_hit %}
+
+        {% for entity, reviews in search_hit.items() %}
+        <div class="card-container">
+            <div class="float-layout">
+              <div class="card-image">
+                <img src="{{ entity.picture_url }}">
+                <div class="card">
+                  <div class="card-title">{{entity.name}}</div>
+                  <div class="card-desc">
+                    {{entity.description|e}}
+                  </div>
+                  <div class="card-address">
+                    {{entity.address|e}}
+                  </div>
+                  <div class="card-contact">
+                    {{entity.contact|e}}
+                  </div>
+
+                  {% if entity.id in sentiments.keys() %}
+                  <div class="sentiments">
+                    <div class="sentiment-key-areas">
+                      {% for area, sentiment in sentiments[entity.id].items() %}
+                        <div {% if sentiment[0] == "Good" %} 
+                              class="green box" 
+                             {% elif sentiment[0] == "Bad" %} 
+                              class="red box"
+                             {% elif sentiment[0] == "Neutral" %} 
+                              class="yellow box"
+                             {% elif sentiment[0] == "None" %} 
+                              class="none box"
+                             {% else %} 
+                              class="box" 
+                             {% endif %} >
+                             {{ area|e }}
+                        </div>
+                      {% endfor %}
+
+                      <div class="sentiment-overall">
+                        {% set overall_sentiment = [] %}
+                        {% for sentiment in sentiments[entity.id].values() %}
+                          {% if overall_sentiment.append(sentiment[1]) %}
+                          {% endif %}
+                        {% endfor %}
+  
+                        {% if overall_sentiment|sum > 10 %}
+                          <img class="face" src="../static/resources/sentiment_good.svg">
+                        {% elif overall_sentiment|sum < 0 %}
+                          <img class="face" src="../static/resources/sentiment_bad.svg">
+                        {% else %}
+                          <img class="face" src="../static/resources/sentiment_neutral.svg">
+                        {% endif %}
+                      </div>
+
+                    </div>
+  
+                  </div>
+                  {% endif %}
+                </div>
+
+                </div>
+              </div>
+            </div>
+        </div>
         {% endfor %}
 
-        <!-- {% if cards %}
-        {% endif %} -->
-
+        {% endif %}
         
     </body>
 

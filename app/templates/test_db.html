@@ -15,6 +15,7 @@
       <th scope="col">Entity Contact</th>
       <th scope="col">Entity Website</th>
       <th scope="col">Reviews</th>
+      <th scope="col">Image URL</th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +31,7 @@
         <td class="lead">{{ reviews[rev_idx].content }}</td>
         {% endif %}
       {% endfor %}
+      <td class="lead">{{ entities[ent_idx].picture_url }}</td>
     </tr>
   {% endfor %}
   </tbody>

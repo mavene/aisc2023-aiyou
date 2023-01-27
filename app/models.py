@@ -28,9 +28,11 @@ class Entity(db.Model):
     __tablename__ = 'entity'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128))
+    description = db.Column(db.String(128))
     address = db.Column(db.String(255))
     website = db.Column(db.String(128))
     contact = db.Column(db.String(64))
+    picture_url = db.Column(db.String(255))
     review = db.relationship("Review", back_populates="entity")
 
 # Child
@@ -40,31 +42,25 @@ class Review(db.Model):
     content = db.Column(db.String(255))
     entity_id = db.Column(db.Integer, db.ForeignKey('entity.id'))
     entity = db.relationship("Entity", back_populates="review")
-    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    # user = db.relationship("User", back_populates="review")
-
-    def __repr__(self):
-        return f'{self.content}'
-
+    
 with application.app_context():
     db.create_all()
     
-    csv_file = "prev_data.csv"
-    filename = os.path.dirname(os.path.abspath(__file__)) + "\\" + csv_file
+    csv_files = ["entity_data.csv", "review_data.csv"]
+    for csv in csv_files:
+        filename = os.path.dirname(os.path.abspath(__file__)) + "\\" + csv
 
-    df = pd.read_csv(filename)
+        df = pd.read_csv(filename)
 
-    for index, row in df.iterrows():
-        new_entity = Entity(id=row['entity_id'], name=row['name'], address=row['address'], website=row['website'], contact=row['contact'])
-        new_review = Review(id=row['review_id'], content=row['review'], entity_id=row['entity_id'])
-        db.session.merge(new_entity)
-        db.session.merge(new_review)
+        for index, row in df.iterrows():
+            if csv == "entity_data.csv":
+                new_entity = Entity(id=row['entity_id'], name=row['name'], description=row['description'], address=row['address'], website=row['website'], contact=row['contact'], picture_url=row['picture_url'])
+                db.session.merge(new_entity)
+            elif csv == "review_data.csv":
+                new_review = Review(id=row['review_id'], content=row['review'], entity_id=row['entity_id'])
+                db.session.merge(new_review)
+                     
+    try:
         db.session.commit()
-
-class Card():
-    def __init__(self, entity_id):
-        self.entity = entity_id
-        # Query for everything using the entity_id
-        # Retrieve latest, oldest and random review
-        # tags -> strengths (Food, Service, Price, Atmosphere, Preferences)
-        # use get, set methods for these i guess
+    except Exception:
+        pass

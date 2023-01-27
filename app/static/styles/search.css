@@ -1,3 +1,7 @@
+.search-box {
+    height: 65px;
+}
+
 .search-bar {
     position: absolute;
     width: 65%;
@@ -10,6 +14,13 @@
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.45));
 }
 
+input::before {
+    content: url("../resources/icon_search.svg");
+    width: 10px;
+    height: 10px;
+    text-indent: 1em;
+}
+
 input {
     position: relative;
     left: 5%;
@@ -19,4 +30,161 @@ input {
     border:none;
     width: 95%;
     outline: none;
+}
+
+.float-layout {
+    /* float: right; */
+    text-align: center;
+    width: 55%;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+  
+.card-container {
+    overflow: hidden;
+    padding: 1%;
+}
+  
+.card {
+    background-color: #FCFBFB;
+    color: black;
+    min-height: 10%; /*replace this it in width: 100%*/
+    width: 50%;
+    float: right;
+}
+  
+.card-title {
+    font-family: 'Lexend';
+    font-size: 22px;
+    font-weight: 500;
+    text-align: left;
+    font-style: 'normal';
+    padding: 10px;
+}
+  
+.card-desc {
+    padding: 10px;
+    text-align: left;
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #000000;
+}
+
+.card-address::before {
+    content: url("../resources/icon_address.svg");
+    width: 20px;
+    height: 20px;
+}
+
+.card-address {
+    padding-left: 10px;
+    padding-top: 4px;
+    text-align: left;
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 22px;
+    color: #000000;
+}
+
+.card-contact::before {
+    content: url("../resources/icon_phone.svg");
+    width: 5px;
+    height: 5px;
+}
+
+.card-contact {
+    padding-left: 10px;
+    padding-top: 4px;
+    padding-bottom: 10px;
+    text-align: left;
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 22px;
+    color: #000000;
+}
+  
+/*add this it*/
+.card-image {
+    display: flex;
+
+    border: 2px solid #E2E2E2;
+    box-shadow: 0px 5px 20px rgba(159, 167, 181, 0.2);
+    border-radius: 14px;
+}
+  
+div.card-image img {
+    width: 50%;
+    border-top-left-radius: 14px;
+    border-bottom-left-radius: 14px;
+    max-width: 385px;
+    max-height: 350px;
+}
+  
+/* Phone Devices Query */
+@media only screen and (max-width: 30em) {
+    div.card-image img {
+        width: 100%;
+    }
+    
+    /*add this it*/
+    .card-image {
+       flex-direction: column;
+    }
+  
+    .card {
+      width: 100%;
+      margin-top: -10px;
+    }
+  }
+
+.sentiment-key-areas {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-left: 10px;
+}
+
+.box {
+    top: 50%;
+    width: 123px;
+    height: 34px;
+
+    border-radius: 5px;
+    align-items: center;
+    align-content: center;
+}
+
+.green {
+    background: rgba(107, 192, 78, 0.35);
+}
+
+.red {
+    background: rgba(235, 72, 65, 0.26);
+}
+
+.yellow {
+    background: rgba(255, 200, 74, 0.35);
+}
+
+.none {
+    background: #D9D9D9;
+}
+
+.face {
+    padding-bottom: 10px;
+    padding-right: 10px;
+    width: 75px;
+    float: right;
+
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+
 }
