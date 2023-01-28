@@ -27,6 +27,12 @@
               <div class="card-image">
                 <img src="{{ entity.picture_url }}">
                 <div class="card">
+                  <div>
+                    <form id="details" action="{{ url_for('details', company_name=entity.name) }}" method="POST">
+                      <input type="hidden" name="sentiments" value="{{ sentiments[entity.id] }}">
+                    </form>
+                    <button type="submit" form="details" class="see-more" value="Submit">See More</button>
+                  </div>
                   <div class="card-title">{{entity.name}}</div>
                   <div class="card-desc">
                     {{entity.description|e}}
@@ -34,12 +40,30 @@
                   <div class="card-address">
                     {{entity.address|e}}
                   </div>
+                  <div class="card-opening">
+                    Open 24 hours
+                  </div>
                   <div class="card-contact">
                     {{entity.contact|e}}
                   </div>
 
                   {% if entity.id in sentiments.keys() %}
                   <div class="sentiments">
+                    <div class="sentiment-overall">
+                      {% set overall_sentiment = [] %}
+                      {% for sentiment in sentiments[entity.id].values() %}
+                        {% if overall_sentiment.append(sentiment[1]) %}
+                        {% endif %}
+                      {% endfor %}
+
+                      {% if overall_sentiment|sum > 10 %}
+                        <img class="face" src="../static/resources/sentiment_good.svg">
+                      {% elif overall_sentiment|sum < 0 %}
+                        <img class="face" src="../static/resources/sentiment_bad.svg">
+                      {% else %}
+                        <img class="face" src="../static/resources/sentiment_neutral.svg">
+                      {% endif %}
+                    </div>
                     <div class="sentiment-key-areas">
                       {% for area, sentiment in sentiments[entity.id].items() %}
                         <div {% if sentiment[0] == "Good" %} 
@@ -56,22 +80,6 @@
                              {{ area|e }}
                         </div>
                       {% endfor %}
-
-                      <div class="sentiment-overall">
-                        {% set overall_sentiment = [] %}
-                        {% for sentiment in sentiments[entity.id].values() %}
-                          {% if overall_sentiment.append(sentiment[1]) %}
-                          {% endif %}
-                        {% endfor %}
-  
-                        {% if overall_sentiment|sum > 10 %}
-                          <img class="face" src="../static/resources/sentiment_good.svg">
-                        {% elif overall_sentiment|sum < 0 %}
-                          <img class="face" src="../static/resources/sentiment_bad.svg">
-                        {% else %}
-                          <img class="face" src="../static/resources/sentiment_neutral.svg">
-                        {% endif %}
-                      </div>
 
                     </div>
   

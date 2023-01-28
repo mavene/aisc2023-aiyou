@@ -31,3 +31,15 @@ def test_db():
     reviews = Review.query.all()
     return render_template('test_db.html', title='Testing testing 1 2 3',
         entities=entities, reviews=reviews)
+
+@application.route('/<company_name>/details', methods=['GET', 'POST'])
+def details(company_name):
+    if request.method == "POST":
+        redirect_entity = Entity.query.filter(Entity.name.like(company_name)).first()
+        redirect_sentiment = request.form.get("sentiments")
+    else:
+        redirect_entity = ""
+        redirect_sentiment = ""
+    print(redirect_entity)
+    print(redirect_sentiment)
+    return render_template('details.html', entity=redirect_entity, sentiment=redirect_sentiment)

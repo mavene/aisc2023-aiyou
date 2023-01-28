@@ -1,0 +1,115 @@
+html {
+  background-color: white;
+}
+
+.rectangle {
+  position: relative;
+  width: 551px;
+  height: 1024px;
+  left: 0px;
+  top: 0px;
+
+  background: #2e424d;
+}
+
+.image {
+  position: relative;
+  object-fit: contain;
+  width: 502px;
+  height: 337px;
+  left: 17px;
+  top: 116px;
+
+  filter: drop-shadow(-10px 10px 40px rgba(234, 235, 237, 0.2));
+  border-radius: 15px;
+}
+
+.name {
+  position: relative;
+  width: 492px;
+  height: 40px;
+  left: 17px;
+  top: 120px;
+
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 40px;
+
+  color: #eaebed;
+}
+
+.desc {
+  position: relative;
+  width: 490px;
+  height: 48px;
+  left: 17px;
+  top: 140px;
+
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  /* or 122% */
+
+  color: #eaebed;
+}
+
+.address {
+  position: relative;
+  width: 461.23px;
+  height: 40px;
+  left: 55px;
+  top: 140px;
+
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 20px;
+  /* or 111% */
+
+  display: flex;
+  align-items: center;
+
+  color: #eaebed;
+}
+
+.opening_hour {
+  position: relative;
+  width: 461.23px;
+  height: 20px;
+  left: 55px;
+  top: 140px;
+
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 20px;
+  /* identical to box height, or 111% */
+
+  display: flex;
+  align-items: center;
+
+  color: #eaebed;
+}
+
+.summary {
+  position: relative;
+  width: 497px;
+  height: 176px;
+  left: 17px;
+  top: 200px;
+
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 163.42%;
+  /* or 33px */
+
+  color: #eaebed;
+}
