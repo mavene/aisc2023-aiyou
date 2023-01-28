@@ -35,11 +35,13 @@ def test_db():
 @application.route('/<company_name>/details', methods=['GET', 'POST'])
 def details(company_name):
     if request.method == "POST":
-        redirect_entity = Entity.query.filter(Entity.name.like(company_name)).first()
+        entity = request.form.get("entity_id")
+        print(entity)
+        redirect_entity = Entity.query.filter(Entity.id.like(entity)).first()
         redirect_sentiment = request.form.get("sentiments")
+        print(redirect_entity)
+        print(redirect_sentiment)
     else:
         redirect_entity = ""
         redirect_sentiment = ""
-    print(redirect_entity)
-    print(redirect_sentiment)
     return render_template('details.html', entity=redirect_entity, sentiment=redirect_sentiment)

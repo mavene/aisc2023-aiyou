@@ -8,28 +8,38 @@
     height: 4%;
     top: 11%;
     left: 20%;
-
     background: rgba(213, 213, 213, 0.86);
     border-radius: 25px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.45));
 }
 
-input::before {
-    content: url("../resources/icon_search.svg");
-    width: 10px;
-    height: 10px;
-    text-indent: 1em;
+span {
+    position: relative;
+    display: inline-flex;
+    left: 3%;
+    top: 15%;
+    align-items: center;
 }
 
-input {
+input:focus {
+    outline:none;
+    background: rgba(213, 213, 213, 0.86)
+}
+
+.search-ico {
     position: relative;
     left: 5%;
-    top: 14%;
-    align-items: left;
+    padding-top: 2%;
     background: rgba(213, 213, 213, 0.25);
-    border:none;
-    width: 95%;
+    
+    border: none;
+    width: 200px;
     outline: none;
+}
+
+.input-ico {
+    width: 23px;
+    height: 23px;
 }
 
 .float-layout {
