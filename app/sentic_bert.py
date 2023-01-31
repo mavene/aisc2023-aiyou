@@ -109,8 +109,3 @@ def inference(entities):
         entity_sentiment[entity.id] = sentiment_template
 
     return entity_sentiment
-
-# TODO: Figure out how to preload model bins so it doesn't load all the time
-# TODO: Quick start guide and Landing Page
-# TODO: Aggregate the 5 areas: Food, Service, Cleanliness, Price, Atmosphere
-# TODO: Right is word cloud at top then, top 5 areas of Food, Service, Cleanliness, (3 will be big on top and 2 will be smaller below -> probably use templating)

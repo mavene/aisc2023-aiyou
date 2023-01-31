@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for
-from app import application, engine, sentic_bert
+from app import application, engine, sentic_bert, find_relevant, gen_cloud
 from app.models import Entity, Review
 
 @application.route('/')
@@ -38,12 +38,22 @@ def test_db():
 
 @application.route('/<company_name>/details', methods=['GET', 'POST'])
 def details(company_name):
-    if request.method == 'POST':
+    print(request.form)
+    if 'new-search' in request.form:
+        return redirect(url_for('search'), code=307)
+    elif request.method == 'POST':
         detail = request.form.get("details").strip("[]")
-        detail_list = detail.split(",")
-        redirect_entity = Entity.query.filter(Entity.id.like(detail_list[0])).first()
-        redirect_sentiment = detail_list[1:]
+        redirect_sentiment = [int(elem) for elem in detail.split(",")]
+        redirect_entity = Entity.query.filter(Entity.name.like(company_name)).first()
+        all_reviews = find_relevant.find_reviews(redirect_entity)
+        text = [review.content for review_list in all_reviews.values() for review in review_list ]
+        gen_cloud.generate(" ".join(text))
     else:
         redirect_entity = ""
         redirect_sentiment = ""
-    return render_template('details.html', entity=redirect_entity, sentiment=redirect_sentiment)
+        all_reviews = ""
+    return render_template('details.html', entity=redirect_entity, sentiment=redirect_sentiment, reviews=all_reviews)
+
+@application.errorhandler(404)
+def invalid_route(e):
+    return render_template('404.html')

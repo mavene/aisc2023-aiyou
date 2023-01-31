@@ -40,6 +40,8 @@ class Review(db.Model):
     __tablename__ = 'review'
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(255))
+    author = db.Column(db.String(255))
+    date = db.Column(db.String(255))
     entity_id = db.Column(db.Integer, db.ForeignKey('entity.id'))
     entity = db.relationship("Entity", back_populates="review")
     
@@ -57,7 +59,7 @@ with application.app_context():
                 new_entity = Entity(id=row['entity_id'], name=row['name'], description=row['description'], address=row['address'], website=row['website'], contact=row['contact'], picture_url=row['picture_url'])
                 db.session.merge(new_entity)
             elif csv == "review_data.csv":
-                new_review = Review(id=row['review_id'], content=row['review'], entity_id=row['entity_id'])
+                new_review = Review(id=row['review_id'], content=row['review'], entity_id=row['entity_id'], author=row['author'], date=row['date'])
                 db.session.merge(new_review)
                      
     try:

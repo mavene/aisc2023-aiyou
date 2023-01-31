@@ -1,0 +1,15 @@
+{% block app_content %}
+
+<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/details.css') }}" />
+
+    <a href="{{ url_for('index') }}" class="logo">
+        <img class="greeting" style="display: block; margin: 0 auto !important; align-items: center; padding-top:200px;" src="../static/resources/logo_aiyou.svg">
+    </a>
+    <p style="text-align: center; font-family: 'Lexend'; padding-left: 40px;">Hey buddy, I think you got lost!<br><br>Butter click on me to go back Home!</p>    
+</body>
+
+{% endblock %}

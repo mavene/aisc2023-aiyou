@@ -1,98 +1,128 @@
 {% block app_content %}
+    
+
     <body>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;300;400;500&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/details.css') }}" />
-        
-        {% if entity and sentiment %}
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "200px";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
+
+        {% if entity and sentiment and reviews %}
+        <div id="mySidenav" class="sidenav">
+            <a class="side-menu" href="javascript:void(0)" class="closbtn" onclick="closeNav()"><img src="../static/resources/logo_back.svg" style="width: 11px; height: 25px;"></a>
+            <a class="side-menu" href="{{ url_for('index') }}">Home</a>
+            <a class="side-menu" href="{{ url_for('about_us') }}">About Us</a>
+            <a class="side-menu" href="{{ url_for('get_started') }}">Get Started</a>
+        </div>
+
         <div class="container">
-        <div class="rectangle">
-            <form name="form", method="POST">
-                <div class="search-bar">
-                    <span class="search-span"><img src="../static/resources/icon_search.svg" class="input-ico">
-                    <input type="text" name="search_terms" class="search-ico" placeholder="Find cafes, restaurants, and more..."></span>
-                </div>
-            </form>
-
-            <div class="details">
-                <img class="image" src="{{ entity.picture_url }}"/>
-                <h1 class="name">{{ entity.name }}</h1>
-                <div class="desc">
-                    {{entity.description|e}}
-                </div>
-                <div class="address">
-                    {{entity.address|e}}
-                </div>
-                <div class="opening-hour">
-                    Open 24 hours
+            <div class="left">
+                <span><a onclick="openNav()"><img style="position: absolute; left: 2%; width: 40px; height: 40px; top: 25px;" src="../static/resources/logo_menu.svg" style="width: 40px; height: 40px;"></a></span>
+                <div class="search-container">
+                    <form method="POST">
+                        <div class="search-bar">
+                            <span class="search-span"><img src="../static/resources/icon_search.svg" class="input-ico">
+                            <input type="text" name="search_terms" class="search-ico" placeholder="Something new?"></span>
+                            <input type="hidden" name="new-search">
+                        </div>
+                    </form>
                 </div>
 
-                <span class="contact-ico">
-                    <div class="contact-phone">
-                        <img src="../static/resources/icon_phone_grey.svg">
+                <div class="details">
+                    <img class="image" src="{{ entity.picture_url }}"/>
+                    <h1 class="name">{{ entity.name }}</h1>
+                    <div class="desc">
+                        {{entity.description|e}}
                     </div>
-                    <div class="contact-mail">
-                        <img src="../static/resources/icon_email_grey.svg">
+                    <div class="address">
+                        {{entity.address|e}}
                     </div>
-                    <div class="website">
-                        <img src="../static/resources/icon_globe_grey.svg">
+                    <div class="opening-hour">
+                        pen 24 hours
                     </div>
-                </span>
+
+                    <span class="contact-ico">
+                        <div class="contact-phone">
+                            <img src="../static/resources/icon_phone_grey.svg">
+                        </div>
+                        <div class="contact-mail">
+                            <img src="../static/resources/icon_email_grey.svg">
+                        </div>
+                        <div class="website">
+                            <img src="../static/resources/icon_globe_grey.svg">
+                        </div>
+                    </span>
     
-                <p class="summary"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget...e</p>
+                    <p class="summary"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget...e</p>
+                </div>
             </div>
-        </div>
 
-        <div class="analysis">
-            <h2>Overview</h2>
-            <img class="graph" src="../static/resources/logo_aiyou.svg">
-            <h2 style="clear:left;">Categories</h2>
-            <div class="categories">
-                <div class="category">
-                    <h3 class="cat-title service-ico">Services</h3>
-                    <img class="head" src="../static/resources/sentiment_good.svg">
-                    <hr>
-                    <p>Bryan</p>
-                    <p>September 2022</p>
-                    <p>Lorem ipsum kdjafjdkljakfdksaafdkasfkdlsafkdalf</p>
-                </div>
-                <div class="category">
-                    <h3 class="cat-title food-ico">Services</h3>
-                    <img class="head" src="../static/resources/sentiment_good.svg">
-                    <hr>
-                    <p>Bryan</p>
-                    <p>September 2022</p>
-                    <p>Lorem ipsum kdjafjdkljakfdksaafdkasfkdlsafkdalf</p>
-                </div>
-                <div class="category">
-                    <h3 class="cat-title clean-ico">Services</h3>
-                    <img class="head" src="../static/resources/sentiment_good.svg">
-                    <hr>
-                    <p>Bryan</p>
-                    <p>September 2022</p>
-                    <p>Lorem ipsum kdjafjdkljakfdksaafdkasfkdlsafkdalf</p>
-                </div>
-                <div class="category">
-                    <h3 class="cat-title price-ico">Services</h3>
-                    <img class="head" src="../static/resources/sentiment_good.svg">
-                    <hr>
-                    <p>Bryan</p>
-                    <p>September 2022</p>
-                    <p>Lorem ipsum kdjafjdkljakfdksaafdkasfkdlsafkdalf</p>
-                </div>
+            <div class="right">
+                <h2>Overview</h2>
+                <img class="graph" src="../static/resources/wordcloud.svg">
+                <h2 style="clear:left;">Categories</h2>
+                <div class="categories">
+                    {% set idx = -1 %}
+                    {% for category, review_list in reviews.items() %}
+                        <div class="category">
+                            {% if category == "Food" %}
+                                <span><h3 class="cat-title food-ico">Food</h3></span>
+                                {% set idx = 0 %}
+                            {% elif category == "Service" %}
+                                <span><h3 class="cat-title service-ico">Service</h3></span>
+                                {% set idx = 1 %}
+                            {% elif category == "Cleanliness" %}
+                                <span><h3 class="cat-title clean-ico">Cleanliness</h3></span>
+                                {% set idx = 2 %}
+                            {% elif category == "Price" %}
+                                <span><h3 class="cat-title price-ico">Price</h3></span>
+                                {% set idx = 3 %}
+                            {% elif category == "Ambience" %}
+                                <span><h3 class="cat-title ambience-ico">Ambience</h3></span>
+                                {% set idx = 4 %}
+                            {% endif %}
+
+                            <span>
+                                {% if sentiment[idx] > 10 %}
+                                  <img class="face" src="../static/resources/sentiment_good.svg">
+                                {% elif sentiment[idx] < 0 %}
+                                  <img class="face" src="../static/resources/sentiment_bad.svg">
+                                {% else %}
+                                  <img class="face" src="../static/resources/sentiment_neutral.svg">
+                                {% endif %}
+                            </span>
+                            <hr>
+                            {% if review_list|length > 0 %}
+                                    <span class="review-content">{{review_list[-1].author}}</span>
+                                    <span class="review-content" style="float:right;">{{review_list[-1].date}}</span>
+                                    <p class="review-content">{{review_list[-1].content}}</p>
+                            {% else %}
+                                <span class="review-content"></span>
+                                <span class="review-content"></span>
+                                <p class="review-content">No rye-view as of yet!</p>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+            </div>
             </div>
         </div>
-        </div>
-    </div>
 
         {% else %}
 
-        <a href="{{ url_for('index') }}" class="logo">
+        <a href="{{ url_for('search') }}" class="logo">
             <img class="greeting" style="display: block; margin: 0 auto !important; align-items: center; padding-top:200px;" src="../static/resources/logo_aiyou.svg">
         </a>
-        <p style="text-align: center; font-family: 'Lexend'; padding-left: 40px;">Hey buddy, I think you got lost!<br><br>Click on me to go back Home."</p>
-        
+        <p style="text-align: center; font-family: 'Lexend'; padding-left: 40px;">The website is loafing around!<br><br>Click on me to go back Home.</p>
+
         {% endif %}
         
     </body>

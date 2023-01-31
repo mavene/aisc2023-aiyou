@@ -30,14 +30,12 @@
                 <img src="{{ entity.picture_url }}">
                 <div class="card">
                   <form id="more-details" action="{{ url_for('details', company_name=entity.name) }}" method="POST">
-                    {% set see_more = [] %}
-                    {% if see_more.append(entity.id) %}
-                    {% endif %}
+                    {% set overall_sentiment = [] %}
                     {% for sentiment in sentiments[entity.id].values() %}
-                        {% if see_more.append(sentiment[1]) %}
+                        {% if overall_sentiment.append(sentiment[1]) %}
                         {% endif %}
                     {% endfor %}
-                    <button type="submit" form="more-details" name="details" class="see-more" value="{{ see_more }}">See More</button>
+                    <button type="submit" form="more-details" name="details" class="see-more" value="{{ overall_sentiment }}">See More</button>
                   </form>
                   <div class="card-title">{{entity.name}}</div>
                   <div class="card-desc">
@@ -56,11 +54,6 @@
                   {% if entity.id in sentiments.keys() %}
                   <div class="sentiments">
                     <div class="sentiment-overall">
-                      {% set overall_sentiment = [] %}
-                      {% for sentiment in sentiments[entity.id].values() %}
-                        {% if overall_sentiment.append(sentiment[1]) %}
-                        {% endif %}
-                      {% endfor %}
 
                       {% if overall_sentiment|sum > 10 %}
                         <img class="face" src="../static/resources/sentiment_good.svg">
