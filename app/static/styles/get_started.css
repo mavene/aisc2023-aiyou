@@ -1,0 +1,80 @@
+.vert-container {
+    position: relative;
+    display: block;
+    width: 85%;
+    height: 820px;
+    margin: 0 auto;
+  }
+
+.top {
+    padding-top: 5%;
+}
+
+.bottom {
+    padding-top: 18%;
+    position: relative;
+}
+
+.left {
+    width: 42%;
+    float: left;
+    text-align: left;
+}
+
+.right {
+    width: 42%;
+    float: right;
+}
+
+.cute-sprite {
+    display: grid;
+    width: 862px;
+    height: 300px;
+    margin: 0 auto;
+    padding-bottom: 3%;
+}
+
+.title {
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 60px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
+
+    color: #000000;
+}
+
+p {
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+}
+
+.prompt {
+    position: relative;
+    background: #2E424D;
+    border-radius: 50px;
+    width: 293px;
+    height: 84px;
+    margin: 0 auto;
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    color: #EAEBED;
+    text-decoration: none;
+}

@@ -17,7 +17,7 @@
         </div>
 
         {% if status %}
-          <img class="greeting" style="display: block; margin: 0 auto !important; align-items: center; padding-top:200px;" src="../static/resources/logo_aiyou.svg">
+          <img class="greeting" style="display: block; margin: 0 auto !important; align-items: center; padding-top:150px;" src="../static/resources/logo_aiyou.svg">
         {% endif %}
 
         {% if search_hit %}
@@ -29,19 +29,16 @@
               <div class="card-image">
                 <img src="{{ entity.picture_url }}">
                 <div class="card">
-                  <div>
-                    {{ entity.name }}
-                    {{ sentiments[entity.id] }}
-                    <form id="more-details" action="{{ url_for('details', company_name=entity.name) }}" method="POST">
-                      {{ entity.name }}
-                      {{ sentiments[entity.id] }}
-                      <input type="hidden" name="entity_id" value="{{ entity.id }}">
-                      <input type="hidden" name="sentiments" value="{{ sentiments[entity.id] }}">
-                      {{ entity.name }}
-                      {{ sentiments[entity.id] }}
-                    </form>
-                    <button type="submit" form="more-details" class="see-more" value="Submit">See More</button>
-                  </div>
+                  <form id="more-details" action="{{ url_for('details', company_name=entity.name) }}" method="POST">
+                    {% set see_more = [] %}
+                    {% if see_more.append(entity.id) %}
+                    {% endif %}
+                    {% for sentiment in sentiments[entity.id].values() %}
+                        {% if see_more.append(sentiment[1]) %}
+                        {% endif %}
+                    {% endfor %}
+                    <button type="submit" form="more-details" name="details" class="see-more" value="{{ see_more }}">See More</button>
+                  </form>
                   <div class="card-title">{{entity.name}}</div>
                   <div class="card-desc">
                     {{entity.description|e}}
@@ -89,13 +86,9 @@
                              {{ area|e }}
                         </div>
                       {% endfor %}
-
                     </div>
-  
                   </div>
                   {% endif %}
-                </div>
-
                 </div>
               </div>
             </div>

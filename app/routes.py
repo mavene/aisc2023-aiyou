@@ -1,15 +1,19 @@
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 from app import application, engine, sentic_bert
 from app.models import Entity, Review
 
 @application.route('/')
 @application.route('/index')
 def index():
-    return render_template('index.html', title='Landing Page (WIP)')
+    return render_template('index.html')
 
 @application.route('/about-us')
 def about_us():
-    return render_template('about_us.html', title='OOPS')
+    return render_template('about_us.html')
+
+@application.route('/get_started')
+def get_started():
+    return render_template('get_started.html')
 
 @application.route('/search', methods=['GET', 'POST'])
 def search():
@@ -17,7 +21,7 @@ def search():
         search_terms = request.form.get("search_terms")
         result = engine.relevant_hits(search_terms)
         sentiment_analysis = sentic_bert.inference([entity for entity in result.keys()])
-        get_started = ""
+        get_started = "" 
     else:
         result = ""
         sentiment_analysis = ""
@@ -34,13 +38,11 @@ def test_db():
 
 @application.route('/<company_name>/details', methods=['GET', 'POST'])
 def details(company_name):
-    if request.method == "POST":
-        entity = request.form.get("entity_id")
-        print(entity)
-        redirect_entity = Entity.query.filter(Entity.id.like(entity)).first()
-        redirect_sentiment = request.form.get("sentiments")
-        print(redirect_entity)
-        print(redirect_sentiment)
+    if request.method == 'POST':
+        detail = request.form.get("details").strip("[]")
+        detail_list = detail.split(",")
+        redirect_entity = Entity.query.filter(Entity.id.like(detail_list[0])).first()
+        redirect_sentiment = detail_list[1:]
     else:
         redirect_entity = ""
         redirect_sentiment = ""

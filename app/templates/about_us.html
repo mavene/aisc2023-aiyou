@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-        <h1>Welcome to {{title}}</h1>
-        <p>
-        	Nothing to see here yet.
-        </p>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;300;400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/get_started.css') }}" />
+
+        <div style="position: relative; display: block; width: 95%; height: 820px; padding-top: 2%; margin: 0 auto;">
+                <p>What are you trying to do?</p>
+                <br>
+                <p>What is different about your idea?</p>
+        </div>
 {% endblock %}

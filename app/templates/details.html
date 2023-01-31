@@ -6,44 +6,85 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/details.css') }}" />
         
         {% if entity and sentiment %}
-
-        {{ entity }}
-        {{ sentiment }}
-
+        <div class="container">
         <div class="rectangle">
             <form name="form", method="POST">
                 <div class="search-bar">
-                    <span><img src="../static/resources/icon_search.svg" class="input-ico">
+                    <span class="search-span"><img src="../static/resources/icon_search.svg" class="input-ico">
                     <input type="text" name="search_terms" class="search-ico" placeholder="Find cafes, restaurants, and more..."></span>
                 </div>
             </form>
 
-            <img class="image" src="{{ entity.picture_url }}"/>
-            <h1 class="name">{{ entity.name }}</h1>
-            <div class="desc">
-                {{entity.description|e}}
-              </div>
-            <div class="address">
-                {{entity.address|e}}
-            </div>
-            <div class="opening-hour">
-                Open 24 hours
-            </div>
+            <div class="details">
+                <img class="image" src="{{ entity.picture_url }}"/>
+                <h1 class="name">{{ entity.name }}</h1>
+                <div class="desc">
+                    {{entity.description|e}}
+                </div>
+                <div class="address">
+                    {{entity.address|e}}
+                </div>
+                <div class="opening-hour">
+                    Open 24 hours
+                </div>
 
-            <span class="contact-ico">
-                <div class="contact-phone">
-                    <img src="../static/resources/icon_phone_grey.svg">
-                </div>
-                <div class="contact-mail">
-                    <img src="../static/resources/icon_email_grey.svg">
-                </div>
-                <div class="website">
-                    <img src="../static/resources/icon_globe_grey.svg">
-                </div>
-            </span>
+                <span class="contact-ico">
+                    <div class="contact-phone">
+                        <img src="../static/resources/icon_phone_grey.svg">
+                    </div>
+                    <div class="contact-mail">
+                        <img src="../static/resources/icon_email_grey.svg">
+                    </div>
+                    <div class="website">
+                        <img src="../static/resources/icon_globe_grey.svg">
+                    </div>
+                </span>
     
-            <p class="summary"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget...  Read more</p>
+                <p class="summary"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget...e</p>
+            </div>
         </div>
+
+        <div class="analysis">
+            <h2>Overview</h2>
+            <img class="graph" src="../static/resources/logo_aiyou.svg">
+            <h2 style="clear:left;">Categories</h2>
+            <div class="categories">
+                <div class="category">
+                    <h3 class="cat-title service-ico">Services</h3>
+                    <img class="head" src="../static/resources/sentiment_good.svg">
+                    <hr>
+                    <p>Bryan</p>
+                    <p>September 2022</p>
+                    <p>Lorem ipsum kdjafjdkljakfdksaafdkasfkdlsafkdalf</p>
+                </div>
+                <div class="category">
+                    <h3 class="cat-title food-ico">Services</h3>
+                    <img class="head" src="../static/resources/sentiment_good.svg">
+                    <hr>
+                    <p>Bryan</p>
+                    <p>September 2022</p>
+                    <p>Lorem ipsum kdjafjdkljakfdksaafdkasfkdlsafkdalf</p>
+                </div>
+                <div class="category">
+                    <h3 class="cat-title clean-ico">Services</h3>
+                    <img class="head" src="../static/resources/sentiment_good.svg">
+                    <hr>
+                    <p>Bryan</p>
+                    <p>September 2022</p>
+                    <p>Lorem ipsum kdjafjdkljakfdksaafdkasfkdlsafkdalf</p>
+                </div>
+                <div class="category">
+                    <h3 class="cat-title price-ico">Services</h3>
+                    <img class="head" src="../static/resources/sentiment_good.svg">
+                    <hr>
+                    <p>Bryan</p>
+                    <p>September 2022</p>
+                    <p>Lorem ipsum kdjafjdkljakfdksaafdkasfkdlsafkdalf</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
 
         {% else %}
 
@@ -52,21 +93,7 @@
         </a>
         <p style="text-align: center; font-family: 'Lexend'; padding-left: 40px;">Hey buddy, I think you got lost!<br><br>Click on me to go back Home."</p>
         
-        
-        
         {% endif %}
-
-        <!-- <p>HELLO</p>
-
-        {% if entity and sentiment %}
-            {{ entity }}
-            {{ entity.name }}
-            {{ entity.id }}
-            {{ entity.address }}
-            {{ sentiment }}
-        {% else %}
-            <p>idk why it no appear</p>
-        {% endif %} -->
         
     </body>
 

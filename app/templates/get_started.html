@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<html>
+    <head>
+        <title>{{title}}</title>
+    </head>
+    <body>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;300;400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/get_started.css') }}" />
+        
+        <div class="vert-container">
+            <div class="top">
+                <div class="left">
+                    <h1 class="title">Compare Prices and Activities in One Step</h1>
+                    <p>Choose the suitable place or activity for you, categories such as cleanliness and price range are provided to help you find the right one.</p>
+                </div>
+                <div style="width:15%">
+                </div>
+                <div class="right">
+                    <h1 class="title">Decide your choice with AI-you</h1>
+                    <p>Determine which place or activity to go with the assistance of AI-you, who reads through all the reviews for you and gives a consolidated sentiment of the place or activity.</p>
+                </div>
+            </div>
+            <div class="bottom">
+                <img class="cute-sprite" src="../static/resources/choice.svg">
+                <a class="prompt" href="{{ url_for('search') }}">Get Started</a>
+            </div>
+        </div>
+
+    </body>
+</html>
+{% endblock %}

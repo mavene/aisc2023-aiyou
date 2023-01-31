@@ -1,0 +1,55 @@
+.landing-card {
+    position: relative;
+    padding-top: 5%;
+    padding-left: 10%;
+    width: 85%;
+    height: 820px;
+    margin: 0 auto
+}
+
+.left {
+    width: 35%;
+    float: left;
+    text-align: left;
+}
+
+.right {
+    width: 65%;
+    float: right;
+}
+
+.title {
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 65px;
+    line-height: 98px;
+    color: #000000;
+    padding-bottom: 35px;
+}
+
+.welcome {
+    position: relative;
+    width: 95%;
+    height: 550px;
+}
+
+.prompt {
+    position: relative;
+    background: #2E424D;
+    border-radius: 50px;
+    width: 293px;
+    height: 84px;
+    margin: 0 auto;
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    color: #EAEBED;
+    text-decoration: none;
+}

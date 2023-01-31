@@ -2,20 +2,21 @@
 
 {% block app_content %}
 <html>
-    <head>
-        <title>{{title}}</title>
-    </head>
     <body>
-        <h1>Welcome to {{title}}</h1>
-        <p>
-        	Insert Landing Page Graphic and Tagline here
-        </p>
-        <ul>
-            <li><a href="search">Get started BUTTON</a></li>
-        </ul>
-        <ul>
-            <li><a href="test_db">Database Testing</a></li>
-        </ul>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;300;400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/landing.css') }}" />
+        
+        <div class="landing-card">
+            <div class="left">
+                <h1 class="title">Get Bready for Your Next Adventure!</h1>
+                <a class="prompt" href="{{ url_for('get_started') }}">Get Started</a>
+            </div>
+            <div class="right">
+                <img class="welcome" src="../static/resources/friends.svg">
+            </div>
+        </div>
 
     </body>
 </html>

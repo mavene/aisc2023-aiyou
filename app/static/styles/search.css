@@ -23,17 +23,17 @@ span {
 
 input:focus {
     outline:none;
-    background: rgba(213, 213, 213, 0.86)
+    background: transparent;
 }
 
 .search-ico {
     position: relative;
     left: 5%;
-    padding-top: 2%;
+    padding-top: 1%;
     background: rgba(213, 213, 213, 0.25);
     
     border: none;
-    width: 200px;
+    width: 400px;
     outline: none;
 }
 
