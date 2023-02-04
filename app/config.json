@@ -1,0 +1,15 @@
+{
+    "_name_or_path": "C:\\Users\\dianm\\Downloads\\naic_test\\naic_test\\app\\sentic_bert.py\\..\\config.json",
+    "architectures": [
+        "SenticGCNBertModel"
+    ],
+    "device": "cuda",
+    "dropout": 0.3,
+    "embed_dim": 300,
+    "hidden_dim": 768,
+    "loss_function": "cross_entropy",
+    "max_seq_len": 85,
+    "polarities_dim": 3,
+    "torch_dtype": "float32",
+    "transformers_version": "4.15.0"
+}

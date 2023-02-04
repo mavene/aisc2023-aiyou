@@ -1,5 +1,7 @@
 from app import search_dict
 from app.models import Review
+import os
+import json
 
 from sgnlp.models.sentic_gcn import (
     SenticGCNBertTokenizer,
@@ -13,16 +15,27 @@ from sgnlp.models.sentic_gcn import (
 
 def inference(entities):
 
+    config_file_path = os.path.abspath(__file__) + "\\..\\" + "config.json"
+
+    with open(config_file_path, 'r+', encoding='utf-8') as f:
+        data = json.load(f)
+        data['_name_or_path'] = str(config_file_path)
+        f.seek(0)
+        json.dump(data, f , indent=4)
+        f.truncate()
+
     entity_sentiment = {}
 
     # Load model
     config = SenticGCNBertConfig.from_pretrained(
-        "https://storage.googleapis.com/sgnlp/models/sentic_gcn/senticgcn_bert/config.json"
+        config_file_path
     )
 
     model = SenticGCNBertModel.from_pretrained(
-        "https://storage.googleapis.com/sgnlp/models/sentic_gcn/senticgcn_bert/pytorch_model.bin", config=config
+        os.path.abspath(__file__) + "\\..\\" + "pytorch_model.bin", config=config
     )
+
+    entity_sentiment = {}
 
     # Create tokenizer
     tokenizer = SenticGCNBertTokenizer.from_pretrained("bert-base-uncased")
