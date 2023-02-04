@@ -12,9 +12,6 @@ def relevant_hits(search_terms):
         relevant_entities_chunk = [Entity.query.filter(Entity.id.like(past_review.entity_id)).all()[0] for past_review in relevant_reviews_chunk]
         named_entities_chunk = Entity.query.filter(Entity.name.like(term)).all()
         output = output + relevant_entities_chunk + named_entities_chunk
-        print(named_entities_chunk)
-
-    print(output)
 
     return list(set(output))
 
