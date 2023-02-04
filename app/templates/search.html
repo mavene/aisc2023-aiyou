@@ -58,9 +58,9 @@
                   <div class="sentiments">
                     <div class="sentiment-overall">
 
-                      {% if overall_sentiment|sum > 3 %}
+                      {% if overall_sentiment|sum > 20 %}
                         <img class="face" src="../static/resources/sentiment_good.svg">
-                      {% elif overall_sentiment|sum < 1 %}
+                      {% elif overall_sentiment|sum < 10 %}
                         <img class="face" src="../static/resources/sentiment_bad.svg">
                       {% else %}
                         <img class="face" src="../static/resources/sentiment_neutral.svg">

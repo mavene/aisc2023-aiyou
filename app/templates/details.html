@@ -1,5 +1,4 @@
 {% block app_content %}
-    
 
     <body>
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -94,7 +93,7 @@
                             <span>
                                 {% if sentiment[idx] > 10 %}
                                   <img class="face" src="../static/resources/sentiment_good.svg">
-                                {% elif sentiment[idx] < 0 %}
+                                {% elif sentiment[idx] < 5 %}
                                   <img class="face" src="../static/resources/sentiment_bad.svg">
                                 {% else %}
                                   <img class="face" src="../static/resources/sentiment_neutral.svg">
@@ -102,9 +101,9 @@
                             </span>
                             <hr>
                             {% if review_list|length > 0 %}
-                                    <span class="review-content">{{review_list[-1].author}}</span>
-                                    <span class="review-content" style="float:right;">{{review_list[-1].date}}</span>
-                                    <p class="review-content">{{review_list[-1].content}}</p>
+                                    <span class="review-content">{{review_list[0].author}}</span>
+                                    <span class="review-content" style="float:right;">{{review_list[0].date}}</span>
+                                    <p class="review-content">{{review_list[0].content}}</p>
                             {% else %}
                                 <span class="review-content"></span>
                                 <span class="review-content"></span>

@@ -79,33 +79,35 @@ def inference(entities):
                         continue
 
             # Prepare data
-            input_batch = []
+            sentiment_sum = 0
+            sentiment = ""
 
             if reviews:
                 for aspect, sentences in reviews.items():
+                    input_batch = []
+
                     for sentence in sentences:
                         input_batch.append(
                         {
                             "aspects": aspect,
                             "sentence": emoji.replace_emoji(sentence.content,"")
-                        }
-                    )
+                        })
 
-            # Perform inference
-            if input_batch:
-                try:
-                    processed_inputs, processed_indices = preprocessor(input_batch)
-                    outputs = model(processed_indices)
-                except ValueError:
-                    continue
+                    # Perform inference
+                    if input_batch:
+                        try:
+                            processed_inputs, processed_indices = preprocessor(input_batch)
+                            outputs = model(processed_indices)
+                            print("SUCCESS")
+                        except ValueError:
+                            print("FAILEDDDDDDDDD")
+                            continue
     
-                # Postprocessing
-                dense_output = postprocessor(processed_inputs=processed_inputs, model_outputs=outputs)
+                        # Postprocessing
+                        dense_output = postprocessor(processed_inputs=processed_inputs, model_outputs=outputs)
                 
-                sentiment_sum = 0
-                sentiment = ""
-                for line in dense_output:
-                    sentiment_sum = sum(line['labels'])
+                        for line in dense_output:
+                            sentiment_sum += sum(line['labels'])
 
                 if sentiment_sum > 5:
                     sentiment = "Good"
