@@ -7,6 +7,8 @@ from wordcloud import WordCloud, STOPWORDS
 from PIL import Image
 import numpy as np
 
+plt.set_loglevel("critical")
+
 def generate(text):
     print(os.path.abspath(__file__))
     mask = np.array(Image.open(os.path.realpath(__file__)+r"\..\static\resources\mask2.png"))

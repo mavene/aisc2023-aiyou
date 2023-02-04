@@ -18,19 +18,22 @@
 
         {% if status %}
           <img class="greeting" style="display: block; margin: 0 auto !important; align-items: center; padding-top:150px;" src="../static/resources/logo_aiyou.svg">
+          <p style="text-align: center; font-family: 'Lexend'; padding-left: 40px;">All you knead to do is type away in the search bar above<br><br>& start your gastronomical adventure!</p>
         {% endif %}
 
         {% if search_hit %}
 
-        {% for entity, reviews in search_hit.items() %}
+        {% for entity in search_hit %}
 
         <div class="card-container">
             <div class="float-layout">
               <div class="card-image">
                 <img src="{{ entity.picture_url }}">
                 <div class="card">
-                  <form id="more-details" action="{{ url_for('details', company_name=entity.name) }}" method="POST">
+                  <form id="more-details" action="{{ url_for('details') }}" method="POST">
                     {% set overall_sentiment = [] %}
+                    {% if overall_sentiment.append(entity.id) %}
+                    {% endif %}
                     {% for sentiment in sentiments[entity.id].values() %}
                         {% if overall_sentiment.append(sentiment[1]) %}
                         {% endif %}
@@ -55,7 +58,7 @@
                   <div class="sentiments">
                     <div class="sentiment-overall">
 
-                      {% if overall_sentiment|sum > 10 %}
+                      {% if overall_sentiment|sum >= 3 %}
                         <img class="face" src="../static/resources/sentiment_good.svg">
                       {% elif overall_sentiment|sum < 0 %}
                         <img class="face" src="../static/resources/sentiment_bad.svg">

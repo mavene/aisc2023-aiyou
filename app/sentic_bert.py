@@ -1,7 +1,8 @@
 from app import search_dict
-from app.models import Review
+from app.models import Review, Entity
 import os
 import json
+import emoji
 
 from sgnlp.models.sentic_gcn import (
     SenticGCNBertTokenizer,
@@ -52,11 +53,6 @@ def inference(entities):
 
     # Create postprocessor
     postprocessor = SenticGCNBertPostprocessor()
-    # label_dict = {
-    #     "-1": "Negative",
-    #     "0": "Neutral",
-    #     "1": "Positive"
-    # }
 
     for entity in entities:
 
@@ -84,15 +80,16 @@ def inference(entities):
 
             # Prepare data
             input_batch = []
+
             if reviews:
                 for aspect, sentences in reviews.items():
                     for sentence in sentences:
                         input_batch.append(
                         {
                             "aspects": aspect,
-                            "sentence": sentence.content
+                            "sentence": emoji.replace_emoji(sentence.content,"")
                         }
-                    )  
+                    )
 
             # Perform inference
             if input_batch:

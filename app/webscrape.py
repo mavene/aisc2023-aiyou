@@ -113,7 +113,8 @@ def clean(test):
 urls = ["https://www.google.com/maps/place/Encik+Tan/@1.356499,103.8461772,11z/data=!4m10!1m2!2m1!1sEncik+Tan!3m6!1s0x31da3d12670e2fd1:0x99e1c1951d45340a!8m2!3d1.3529604!4d103.9403451!15sCglFbmNpayBUYW4iA4gBAVoLIgllbmNpayB0YW6SARBoYWxhbF9yZXN0YXVyYW504AEA!16s%2Fg%2F11dxlg38fy",
     "https://www.google.com/maps/place/Buddy+Hoagies+Caf%C3%A9+%26+Grill/@1.3424411,103.9510012,17z/data=!3m1!4b1!4m5!3m4!1s0x31da3d3cd376ea91:0x382039825a06483d!8m2!3d1.3424411!4d103.9531845",
     "https://www.google.com/maps/place/Spize+@+Bedok/@1.3313414,103.9457261,17z/data=!3m1!4b1!4m5!3m4!1s0x31da3d31eda46eb3:0xec1c90d65bc5e8de!8m2!3d1.3313414!4d103.9479094",
-    "https://www.google.com/maps/place/The+Tipsy+Cow+@+Katong/@1.3060298,103.8939135,17z/data=!3m1!4b1!4m5!3m4!1s0x31da186b6eeccb17:0xb3ef6f5cdf2507f6!8m2!3d1.3060199!4d103.8960717"]
+    "https://www.google.com/maps/place/The+Tipsy+Cow+@+Katong/@1.3060298,103.8939135,17z/data=!3m1!4b1!4m5!3m4!1s0x31da186b6eeccb17:0xb3ef6f5cdf2507f6!8m2!3d1.3060199!4d103.8960717",
+    "https://www.google.com/maps/place/Starbucks/@1.3060298,103.8960968,15z/data=!3m1!5s0x31da1871a40e3bad:0xe35907eccab30f20!4m10!1m2!2m1!1sstarbucks!3m6!1s0x31da18719a1765d9:0xbd6a9159dd45236f!8m2!3d1.3020241!4d103.905097!15sCglzdGFyYnVja3MiA4gBAVoLIglzdGFyYnVja3OSAQRjYWZl4AEA!16s%2Fg%2F1thr4ppm"]
 places = []
 
 def main():

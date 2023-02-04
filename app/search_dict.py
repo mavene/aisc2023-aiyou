@@ -1,5 +1,5 @@
 terms = {
-    "Food": ["food", "eat", "curry", "rice", "noodles", "fish", "seafood", "cheese", "beef", "meal",
+    "Food": ["food", "cafe", "eat", "curry", "rice", "noodles", "fish", "seafood", "cheese", "beef", "meal",
     "dining", "waffles", "drinks", "dessert", "breakfast", "lunch", "dinner",
     "brunch", "egg", "ham", "chicken", "lamb", "steak", "fine", "meat", "fruits",
     "prawn", "oyster", "snacks", "coffee", "tea", "fries", "burgers", "apple", "sundae", "cone",
@@ -11,7 +11,7 @@ terms = {
 
     "Service": ["service", "crew", "friendly", "unfriendly", "rude", "inattentive", "advice",
     "greet", "prompt", "swift", "efficient", "patient", "kind", "helpful", "informative", "proactive", 
-    "engaging", "character", "attitude", "temperament", "calm", "cool", "angry", "retort",
+    "engaging", "character", "attitude", "temperament", "calm", "angry", "retort",
     "assist", "guide", "outstanding", "ignored", "shout", "waiting", "reservation", "coordinate", "communication",
     "delay", "ahead", "punctual", "approachable", "crowds", "schedule", "book", "helpline", "query", "response"],
     
@@ -23,7 +23,7 @@ terms = {
     "Price": ["price", "reasonable", "pricey", "affordable", "cheap", "value", "worth", "steep",
     "expensive", "atas", "rich", "humble", "simple", "luxury", "high", "low", "wallet", "save",
     "expense", "payment", "methods", "shopee", "wallet", "cash", "cashless", "card", "paywave",
-    "paylah", "rebate", "discount", "offer", "special", "grab", "budget", "huge", "promo",
+    "paylah", "rebate", "discount", "offer", "grab", "budget", "huge", "promo",
     "set", "range", "economic"],
     
     "Preferences": ["preferences", "halal", "vegetarian", "gluten-free", "plant-based", "keto",
@@ -37,5 +37,5 @@ terms = {
     "furniture", "ambience", "loud", "hectic", "busy", "quiet", "spacious", "airy", "breezy", "lovely",
     "romantic", "laidback", "chill", "lax", "lively", "festive", "Christmas", "Raya", "Chinese New Year",
     "Halloween", "exotic", "collection", "lounge", "diner", "restaurant", "cafe", "family", "dates",
-    "celebration", "hangout", "spirit", "intimate"]
+    "celebration", "hangout", "spirit", "intimate", "sunny", "shade", "aircon", "plugs", "sockets"]
 }
