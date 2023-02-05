@@ -3,12 +3,11 @@
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
     - [About](#about)
-    - [Setup](#setup)
+    - [Instructions](#setup)
     - [Credits](#credits)
     - [Bibliography](#bibliography)
 
 <!-- markdown-toc end -->
-
 
 ## AI-You
 
@@ -26,7 +25,9 @@ Providing sentiment analysis on key specific areas like cleanliness, ambience al
 
 Too many reviews? Well... AI-got-you.
 
-### Setup
+### Instructions
+
+#### Step 1: Download this project
 
 You can choose to clone this project repository from Github or download the zip file from above. On your terminal or Git Bash, type the following:
 
@@ -35,7 +36,9 @@ cd "any_folder_path_you_want_here"
 git clone https://github.com/mavene/aisc2023-aiyou
 ```
 
-Then, run the setup file to run the demo:
+#### Step 2: Run setup file
+
+Then, run through the setup for the demo:
 
 ```shell
 python setup.py
@@ -47,7 +50,19 @@ You should now see this message at the end of the running terminal:
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
-Now you can open your browser at `http://127.0.0.1:5000/` to interact with our demo.
+If there are any issues with the setup.py file, run these at the root of the folder:
+
+```shell
+pipenv shell
+pipenv install -r requirements.txt
+flask run
+```
+
+Look for the abovementioned message to confirm set up is successful.
+
+#### Step 3: Run demo
+
+Open your browser and access `http://127.0.0.1:5000/` to interact with the demo (and our friendly mascot!)
 
 ### Credits
 

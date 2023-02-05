@@ -1,5 +1,5 @@
 {
-    "_name_or_path": "C:\\Users\\dianm\\Downloads\\naic_test\\naic_test\\app\\sentic_bert.py\\..\\config.json",
+    "_name_or_path": "C:\\Users\\dianm\\Downloads\\naic_test\\aisc2023-aiyou\\app\\sentic_bert.py\\..\\config.json",
     "architectures": [
         "SenticGCNBertModel"
     ],
