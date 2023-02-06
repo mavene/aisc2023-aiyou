@@ -45,21 +45,9 @@ def parse_place(selector):
     result = {
         "name": "".join(selector.css("h1 ::text").getall()).strip(),
         "category": selector.css("button[jsaction='pane.rating.category']::text").get(),
-        # most of the data can be extracted through accessibility labels:
         "address": aria_no_label("Address: "),
         "website": aria_no_label("Website: "),
         "phone": aria_no_label("Phone: "),
-        #"review_count": aria_with_label(" reviews").get(),
-        # to extract star numbers from text we can use regex pattern for numbers: "\d+"
-        #"stars": aria_with_label(" stars").re("\d+.*\d+")[0],
-        #"5_stars": aria_with_label("5 stars").re(r"(\d+) review")[0],
-        #"4_stars": aria_with_label("4 stars").re(r"(\d+) review")[0],
-        #"3_stars": aria_with_label("3 stars").re(r"(\d+) review")[0],
-        #"2_stars": aria_with_label("2 stars").re(r"(\d+) review")[0],
-        #"1_stars": aria_with_label("1 stars").re(r"(\d+) review")[0],
-        
-        # "review": "".join(selector.css('#ChdDSUhNMG9nS0VJQ0FnSUR1Mzl5WHJBRRAB *::text').getall()).strip(),
-        #"1": selector.css("span[jstcache='1345']::text").getall(),
     }
     return result
 
@@ -76,24 +64,7 @@ def parse_reviews(selector):
         return text.split(label, 1)[1].strip()
 
     result = {
-        #"name": "".join(selector.css("h1 ::text").getall()).strip(),
-        #"category": selector.css("button[jsaction='pane.rating.category']::text").get(),
-        # most of the data can be extracted through accessibility labels:
-        #"address": aria_no_label("Address: "),
-        #"website": aria_no_label("Website: "),
-        #"phone": aria_no_label("Phone: "),
-        #"review_count": aria_with_label(" reviews").get(),
-        # to extract star numbers from text we can use regex pattern for numbers: "\d+"
-        #"stars": aria_with_label(" stars").re("\d+.*\d+")[0],
-        #"5_stars": aria_with_label("5 stars").re(r"(\d+) review")[0],
-        #"4_stars": aria_with_label("4 stars").re(r"(\d+) review")[0],
-        #"3_stars": aria_with_label("3 stars").re(r"(\d+) review")[0],
-        #"2_stars": aria_with_label("2 stars").re(r"(\d+) review")[0],
-        #"1_stars": aria_with_label("1 stars").re(r"(\d+) review")[0],
-        
-        #"review": "".join(selector.css('.jftiEf fontBodyMedium *::text').getall()).strip(),
         "review": clean(selector.css('.wiI7pd::text').getall()),
-        #"1": selector.css("span[jstcache='1345']::text").getall(),
     }
     return result
 
@@ -140,13 +111,9 @@ def main():
             for l in range(view_more):
                 page.wait_for_selector('button[jsaction="pane.review.expandReview"]')
                 page.locator('button[jsaction="pane.review.expandReview"]').first.click()
-                #time.sleep(2)
                 l+=1
 
             while True:
-
-                # page.mouse.wheel(horizontally, vertically(positive is 
-                # scrolling down, negative is scrolling up)
                 page.mouse.wheel(0, 15000)
                 time.sleep(2) 
 
@@ -155,7 +122,6 @@ def main():
                 for l in range(view_more):
                     page.wait_for_selector('button[jsaction="pane.review.expandReview"]')
                     page.locator('button[jsaction="pane.review.expandReview"]').first.click()
-                    #time.sleep(2)
                     l+=1               
             
                 total_reviews_on_page = page.locator("span[class='wiI7pd']").count()
