@@ -98,9 +98,7 @@ def inference(entities):
                         try:
                             processed_inputs, processed_indices = preprocessor(input_batch)
                             outputs = model(processed_indices)
-                            print("SUCCESS")
                         except ValueError:
-                            print("FAILEDDDDDDDDD")
                             continue
     
                         # Postprocessing
